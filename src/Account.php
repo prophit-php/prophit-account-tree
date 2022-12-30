@@ -10,6 +10,7 @@ class Account extends BaseAccount
         string $id,
         string $name,
         private ?string $parentId = null,
+        private ?int $depth = null,
     ) {
         parent::__construct($id, $name);
     }
@@ -22,5 +23,23 @@ class Account extends BaseAccount
     public function hasParent(): bool
     {
         return $this->parentId !== null;
+    }
+
+    /**
+     * @param int $depth Account depth within the tree, >= 0
+     */
+    public function withDepth(int $depth): self
+    {
+        $clone = clone $this;
+        $clone->depth = $depth;
+        return $clone;
+    }
+
+    /**
+     * @return int Account depth within the tree, >= 0
+     */
+    public function getDepth(): ?int
+    {
+        return $this->depth;
     }
 }

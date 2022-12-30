@@ -20,10 +20,18 @@ test('iterates depth-first', function () {
     ];
     $iterator = new AccountIterator(...$accounts);
     $tree = new AccountTree($iterator);
+
     $expectedAccountIds = [ '1', '4', '5', '3', '2', '6', '7' ];
     $actualAccountIds = array_map(
         fn(Account $account): string => $account->getId(),
         iterator_to_array($tree),
     );
     expect($expectedAccountIds)->toBe($actualAccountIds);
+
+    $expectedAccountDepths = [0, 1, 2, 1, 0, 1, 2];
+    $actualAccountDepths = array_map(
+        fn(Account $account): int => $account->getDepth(),
+        iterator_to_array($tree),
+    );
+    expect($expectedAccountDepths)->toBe($actualAccountDepths);
 });

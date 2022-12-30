@@ -30,7 +30,7 @@ class AccountTree implements IteratorAggregate
         foreach ($this->rootNodes as $rootNode) {
             /** @var AccountTreeNode $currentNode **/
             foreach ($rootNode as $currentNode) {
-                yield $currentNode->getValue();
+                yield $currentNode->getValue()->withDepth($currentNode->depth());
             }
         }
     }
