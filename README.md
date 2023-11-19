@@ -47,19 +47,7 @@ $grandchildAccount = new Account('GRANDCHILD-ID', 'Grandchild Account', $childAc
 
 ## Tree
 
-`prophit/core` provides an `AccountIterator` class to represent an iterable group of accounts.
-
-```php
-<?php
-
-use Prophit\Core\Account\{Account, AccountIterator};
-
-$account1 = new Account('1', 'Account 1');
-$account2 = new Account('2', 'Account 2');
-$iterator = new AccountIterator($account1, $account2);
-```
-
-This library provides an `AccountTree` class, which takes an instance of `AccountIterator` as its only constructor parameter. `AccountTree` is iterable and uses [`loophp/phptree`](https://github.com/loophp/phptree) under the hood to perform a [pre-order traversal](https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR) of the accounts.
+This library provides an `AccountTree` class, which takes an `iterable` collection of `Account` instances as its only constructor parameter. `AccountTree` is iterable and uses [`loophp/phptree`](https://github.com/loophp/phptree) under the hood to perform a [pre-order traversal](https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR) of the accounts.
 
 When `AccountTree` iterates over an account, it returns an instance of that account with an additional property populated to represent the depth of the account within the tree. This depth can be retrieved using the `getDepth()` method of the account instance.
 
@@ -73,16 +61,13 @@ These features together are useful for rendering an account list visualized as a
 // $childAccount = ...
 // $grandchildAccount = ...
 
-use Prophit\Core\Account\AccountIterator;
 use Prophit\AccountTree\AccountTree;
 
-$iterator = new AccountIterator(
+$tree = new AccountTree([
     $parentAccount,
     $childAccount,
     $grandchildAccount,
-);
-
-$tree = new AccountTree($iterator);
+]);
 foreach ($tree as $account) {
     echo str_repeat('  ', $account->getDepth()), $account->getName(), PHP_EOL;
 }

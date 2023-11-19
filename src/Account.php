@@ -9,10 +9,11 @@ class Account extends BaseAccount
     public function __construct(
         string $id,
         string $name,
+        string $currency,
         private ?string $parentId = null,
         private ?int $depth = null,
     ) {
-        parent::__construct($id, $name);
+        parent::__construct($id, $name, $currency);
     }
 
     public function getParentId(): ?string

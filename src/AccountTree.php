@@ -2,10 +2,7 @@
 
 namespace Prophit\AccountTree;
 
-use Prophit\Core\Account\{
-    AccountIterator,
-    AccountTreeIterator,
-};
+use Prophit\Core\Account\Account;
 
 use loophp\phptree\Traverser\PreOrder;
 
@@ -18,8 +15,11 @@ class AccountTree implements IteratorAggregate
     /** @var AccountTreeNode[]|null **/
     private ?array $rootNodes = null;
 
+    /**
+     * @param iterable<Account> $accounts
+     */
     public function __construct(
-        private AccountIterator $accounts,
+        private iterable $accounts,
     ) { }
 
     public function getIterator(): Traversable
