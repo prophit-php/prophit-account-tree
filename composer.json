@@ -3,7 +3,6 @@
     "description": "Tree implementation for hierarchical accounts in Prophit",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Matthew Turland",
