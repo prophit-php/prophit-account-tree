@@ -2,8 +2,6 @@
 
 namespace Prophit\AccountTree;
 
-use Prophit\Core\Account\Account;
-
 use loophp\phptree\Traverser\PreOrder;
 
 use IteratorAggregate;
@@ -30,7 +28,9 @@ class AccountTree implements IteratorAggregate
         foreach ($this->rootNodes as $rootNode) {
             /** @var AccountTreeNode $currentNode **/
             foreach ($rootNode as $currentNode) {
-                yield $currentNode->getValue()->withDepth($currentNode->depth());
+                /** @var Account */
+                $account = $currentNode->getValue();
+                yield $account->withDepth($currentNode->depth());
             }
         }
     }
