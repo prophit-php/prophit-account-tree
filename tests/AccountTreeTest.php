@@ -27,7 +27,7 @@ test('iterates depth-first', function () {
 
     $expectedAccountDepths = [0, 1, 2, 1, 0, 1, 2];
     $actualAccountDepths = array_map(
-        fn(Account $account): int => $account->getDepth(),
+        fn(Account $account): ?int => $account->getDepth(),
         iterator_to_array($tree),
     );
     expect($expectedAccountDepths)->toBe($actualAccountDepths);
